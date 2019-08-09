@@ -1,0 +1,21 @@
+{
+  "tag": [{
+    "label": "Should correctly tag terms",
+    "arguments": ["this", "is", "a", "test"],
+    "result": {
+      "lengh": 4
+    }
+  }, {
+    "label": "Should not tag anything (no term given)",
+    "arguments": [],
+    "result": {
+      "lengh": 0
+    }
+  }, {
+    "label": "Should correctly tag 'special' terms (constructor, prototype)",
+    "arguments": ["constructor", "prototype"],
+    "result": {
+      "lengh": 2
+    }
+  }]
+}

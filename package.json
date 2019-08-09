@@ -1,0 +1,38 @@
+{
+  "name": "tdm-teeft",
+  "version": "1.0.0",
+  "description": "Teeft tdm module",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -t 120000",
+    "docs": "rm -rf docs/html/; cat docs/markdown/head.md > README.md; jsdoc2md --files index.js src/* >> README.md; jsdoc -c .jsdoc.conf.json",
+    "prettier": "prettier --write src/*.js index.js test/run.js test/dataset/in/wrapper.js --config .prettierrc.json --require-pragma"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier; npm run test",
+      "pre-push": "npm run test"
+    }
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NicolasKieffer/tdm-teeft.git"
+  },
+  "author": "NicolasKieffer",
+  "license": "OpenBSD",
+  "dependencies": {
+    "async": "^2.6.2",
+    "auto-tu": "^2.0.1",
+    "javascript-lemmatizer": "0.0.2",
+    "lodash": "^4.17.4",
+    "mocha": "^6.1.4",
+    "snowball-stemmers": "^0.6.0",
+    "tdm-utils": "^2.0.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.3",
+    "jsdoc-to-markdown": "^5.0.0",
+    "husky": "^3.0.0"
+  }
+}
