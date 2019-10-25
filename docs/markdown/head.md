@@ -14,20 +14,20 @@ $ npm i --save tdm-teeft
 Using Node :
 
 ```js
-/* require of Multicat module */
+/* require of Teeft module */
 const Teeft = require('tdm-teeft');
 
 /* Build new Instance of Tagger */
-let tagger = new Multicat.Tagger();
+let tagger = new Teeft.Tagger();
 
-/* Build new Instance of DefaultFilter */
-let defaultfilter = new Multicat.DefaultFilter();
+/* Build new Instance of Filter */
+let filter = new Teeft.Filter();
 
 /* Build new Instance of Indexator */
-let indexator = new Multicat.Indexator();
+let indexator = new Teeft.Indexator();
 
 /* Build new Instance of TermExtraction */
-let termextraction = new Multicat.TermExtraction();
+let termextraction = new Teeft.TermExtraction();
 ```
 
 ## Launch tests

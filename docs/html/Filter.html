@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: DefaultFilter</title>
+    <title>JSDoc: Class: Filter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: DefaultFilter</h1>
+    <h1 class="page-title">Class: Filter</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>DefaultFilter<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DefaultFilter.html">DefaultFilter</a>}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Filter<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Filter.html">Filter</a>}</span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="DefaultFilter"><span class="type-signature"></span>new DefaultFilter<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DefaultFilter.html">DefaultFilter</a>}</span></h4>
+    <h4 class="name" id="Filter"><span class="type-signature"></span>new Filter<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Filter.html">Filter</a>}</span></h4>
     
 
     
@@ -277,7 +277,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="defaultfilter.js.html">defaultfilter.js</a>, <a href="defaultfilter.js.html#line14">line 14</a>
+        <a href="filter.js.html">filter.js</a>, <a href="filter.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -306,7 +306,7 @@
 
         
 <div class="param-desc">
-    - An instance of DefaultFilter
+    - An instance of Filter
 </div>
 
 
@@ -317,7 +317,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="DefaultFilter.html">DefaultFilter</a></span>
+<span class="param-type"><a href="Filter.html">Filter</a></span>
 
 
     </dd>
@@ -326,6 +326,17 @@
     
 
 
+
+
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage of 'contructor' (with paramters)</p>
+    
+    <pre class="prettyprint"><code>let options = {  // Will allow to assign a 'value' depending on the length of indexed text (nb of tokens)  'lengthSteps': {    'values': [ // store intermediate steps here,      { // here : value '4' will be used for text length > 1000 tokens &amp;&amp; text length &lt;= 3000 tokens        'lim': 3000, // 'this property must be > 'lengthSteps.min.lim' &amp;&amp; must be &lt; 'lengthSteps.max.lim'        'value': 4      },      { // here : value '5' will be used for text length > 3000 tokens &amp;&amp; text length &lt;= 4000 tokens        'lim': 4000, // 'this property must be > 'lengthSteps.min.lim' &amp;&amp; must be &lt; 'lengthSteps.max.lim'        'value': 5      }    ],    'min': { // 'value' depending of minimum 'lim' length of text (here : value '1' will be used for text length &lt;= 1000 tokens)      'lim': 1000,      'value': 1    },    'max': { // 'value' depending of maximum 'lim' length of text (here : value '7' will be used for text length > 6000 tokens)      'lim': 6000,      'value': 7    }  },  'minOccur': 3, // Minimal number of occurence (of tokens) used by default : here 3. This value will be updated depending on the length of indexed text when 'configure' function is called  'noLimitStrength': 2 //  },  defaultFilter = new Filter(options);// returns an instance of Filter with properties :// - minOccur : 3// - noLimitStrength : 2// - lengthSteps : {'values': [{'lim': 3000, 'value': 4}, {'lim': 4000, 'value': 5}], 'min': {'lim': 1000, 'value': 1}, 'max': {'lim': 6000, 'value': 7}</code></pre>
+
+        <p class="code-caption">Example usage of 'contructor' (with default values)</p>
+    
+    <pre class="prettyprint"><code>let defaultFilter = new Filter();// returns an instance of Filter with properties :// - minOccur : 7// - noLimitStrength : 2// - lengthSteps : {'values': [{'lim': 3000, 'value': 4}], 'min': {'lim': 1000, 'value': 1}, 'max': {'lim': 6000, 'value': 7}</code></pre>
 
 
 
@@ -479,7 +490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="defaultfilter.js.html">defaultfilter.js</a>, <a href="defaultfilter.js.html#line50">line 50</a>
+        <a href="filter.js.html">filter.js</a>, <a href="filter.js.html#line92">line 92</a>
     </li></ul></dd>
     
 
@@ -528,6 +539,13 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'call' function</p>
+    
+    <pre class="prettyprint"><code>let defaultFilter = new Filter();defaultFilter.configure(500);defaultFilter.call(1, 1); // returns truedefaultFilter.configure(5000);defaultFilter.call(1, 1); // returns false</code></pre>
 
 
 
@@ -638,7 +656,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="defaultfilter.js.html">defaultfilter.js</a>, <a href="defaultfilter.js.html#line59">line 59</a>
+        <a href="filter.js.html">filter.js</a>, <a href="filter.js.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -689,6 +707,13 @@
 
 
 
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'configure' function</p>
+    
+    <pre class="prettyprint"><code>let defaultFilter = new Filter();defaultFilter.configure(500); // returns 1defaultFilter.configure(5000); // returns 7defaultFilter.configure('test'); // returns null</code></pre>
+
+
 
         
     
@@ -706,13 +731,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DefaultFilter.html">DefaultFilter</a></li><li><a href="Indexator.html">Indexator</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="TermExtractor.html">TermExtractor</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Filter.html">Filter</a></li><li><a href="Indexator.html">Indexator</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="TermExtractor.html">TermExtractor</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 09 2019 04:14:08 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Oct 25 2019 21:24:22 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

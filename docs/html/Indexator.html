@@ -310,7 +310,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line23">line 23</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line32">line 32</a>
     </li></ul></dd>
     
 
@@ -361,6 +361,22 @@
 
 
 
+    <h5>Examples</h5>
+    
+        <p class="code-caption">Example usage of 'contructor' (with paramters)</p>
+    
+    <pre class="prettyprint"><code>let options = {
+    'filter': customFilter // According customFilter contain your custom settings
+  },
+  indexator = new Indexator(options);
+// returns an instance of Indexator with custom Filter</code></pre>
+
+        <p class="code-caption">Example usage of 'contructor' (with default values)</p>
+    
+    <pre class="prettyprint"><code>let indexator = new Indexator();
+// returns an instance of Indexator with default options</code></pre>
+
+
 
     
     </div>
@@ -388,7 +404,7 @@
     
 
     
-    <h4 class="name" id="compare"><span class="type-signature"></span>compare<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".compare"><span class="type-signature">(static) </span>compare<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {Number}</span></h4>
     
 
     
@@ -512,7 +528,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line155">line 155</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line203">line 203</a>
     </li></ul></dd>
     
 
@@ -561,6 +577,15 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'compare' function</p>
+    
+    <pre class="prettyprint"><code>Indexator.compare({ 'term': 'a', 'specificity': 1 }, { 'term': 'b', 'specificity': 2 }); // return 1
+Indexator.compare({ 'term': 'a', 'specificity': 1 }, { 'term': 'b', 'specificity': 1 }); // return 0
+Indexator.compare({ 'term': 'a', 'specificity': 2 }, { 'term': 'b', 'specificity': 1 }); // return -1</code></pre>
 
 
 
@@ -671,7 +696,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line166">line 166</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line217">line 217</a>
     </li></ul></dd>
     
 
@@ -700,7 +725,7 @@
 
         
 <div class="param-desc">
-    Return a representation of the fulltext (indexation & more informations/statistics about tokens/terms)
+    Return a representation of fulltext (indexation & more informations/statistics about tokens/terms)
 </div>
 
 
@@ -720,6 +745,14 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'translateTag' function</p>
+    
+    <pre class="prettyprint"><code>let indexator = new Indexator();
+indexator.index('This is a sample sentence'); // return an object representation of indexation</code></pre>
 
 
 
@@ -830,7 +863,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line127">line 127</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line171">line 171</a>
     </li></ul></dd>
     
 
@@ -879,6 +912,23 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'translateTag' function</p>
+    
+    <pre class="prettyprint"><code>let indexator = new Indexator();
+indexator.lemmatize([ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+  { term: 'is', tag: 'VBZ' },
+  { term: 'a', tag: 'DT' },
+  { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+  { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]);
+// return [ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+//   { term: '#', tag: '#' },
+//   { term: '#', tag: '#' },
+//   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+//   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]</code></pre>
 
 
 
@@ -989,7 +1039,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line101">line 101</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line133">line 133</a>
     </li></ul></dd>
     
 
@@ -1038,6 +1088,23 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'sanitize' function</p>
+    
+    <pre class="prettyprint"><code>let indexator = new Indexator();
+indexator.sanitize([ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+  { term: 'is', tag: 'VBZ' },
+  { term: 'a', tag: 'DT' },
+  { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+  { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]);
+// return [ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+//   { term: '#', tag: '#' },
+//   { term: '#', tag: '#' },
+//   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+//   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]</code></pre>
 
 
 
@@ -1148,7 +1215,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line54">line 54</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -1197,6 +1264,14 @@
     
 
 
+
+
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'tokenize' function</p>
+    
+    <pre class="prettyprint"><code>let indexator = new Indexator();
+indexator.tokenize('my sample sentence'); // return ['my', 'sample', 'sentence']</code></pre>
 
 
 
@@ -1307,7 +1382,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line82">line 82</a>
+        <a href="indexator.js.html">indexator.js</a>, <a href="indexator.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -1358,6 +1433,19 @@
 
 
 
+    <h5>Example</h5>
+    
+        <p class="code-caption">Example usage of 'translateTag' function</p>
+    
+    <pre class="prettyprint"><code>let indexator = new Indexator();
+indexator.translateTag(RB); // return 'adv';
+indexator.translateTag(JJ); // return 'adj';
+indexator.translateTag(NN); // return 'noun';
+indexator.translateTag(NNP); // return 'noun';
+indexator.translateTag(VBG); // return 'verb';
+indexator.translateTag(VBN); // return 'verb';</code></pre>
+
+
 
         
     
@@ -1375,13 +1463,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DefaultFilter.html">DefaultFilter</a></li><li><a href="Indexator.html">Indexator</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="TermExtractor.html">TermExtractor</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Filter.html">Filter</a></li><li><a href="Indexator.html">Indexator</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="TermExtractor.html">TermExtractor</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 09 2019 04:14:08 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Oct 25 2019 21:24:22 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

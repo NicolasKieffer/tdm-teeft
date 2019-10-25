@@ -35,12 +35,21 @@
 const Lemmatizer = require('javascript-lemmatizer'),
   snowballFactory = require('snowball-stemmers'),
   Tagger = require('./tagger.js'),
-  DefaultFilter = require('./defaultfilter.js'),
+  Filter = require('./filter.js'),
   lexicon = require('./lexicon.js'),
   TermExtraction = require('./termextractor.js');
 
 /**
  * @constructs Indexator
+ * @example &lt;caption>Example usage of 'contructor' (with paramters)&lt;/caption>
+ * let options = {
+ *     'filter': customFilter // According customFilter contain your custom settings
+ *   },
+ *   indexator = new Indexator(options);
+ * // returns an instance of Indexator with custom Filter
+ * @example &lt;caption>Example usage of 'contructor' (with default values)&lt;/caption>
+ * let indexator = new Indexator();
+ * // returns an instance of Indexator with default options
  * @param {Object} [options] - Options of constructor
  * @param {Object} [options.filter] - Options given to extractor of this instance of Indexator
  * @param {Object} [options.lexicon] - Lexicon used by tagger of this instance of Indexator
@@ -52,7 +61,7 @@ const Indexator = function(options = {}) {
   const filterOpts =
     options &amp;&amp; options.filter
       ? {
-          'filter': new DefaultFilter(options.filter)
+          'filter': new Filter(options.filter)
         }
       : {};
   // Tagger + filter + extractor + lemmatizer
@@ -76,6 +85,9 @@ const Indexator = function(options = {}) {
 
 /**
  * Extract token from a text
+ * @example &lt;caption>Example usage of 'tokenize' function&lt;/caption>
+ * let indexator = new Indexator();
+ * indexator.tokenize('my sample sentence'); // return ['my', 'sample', 'sentence']
  * @param {String} text - Fulltext
  * @return {Array} Array of tokens
  */
@@ -104,6 +116,14 @@ Indexator.prototype.tokenize = function(text = '') {
 
 /**
  * Translate the tag of Tagger to Lemmatizer
+ * @example &lt;caption>Example usage of 'translateTag' function&lt;/caption>
+ * let indexator = new Indexator();
+ * indexator.translateTag(RB); // return 'adv';
+ * indexator.translateTag(JJ); // return 'adj';
+ * indexator.translateTag(NN); // return 'noun';
+ * indexator.translateTag(NNP); // return 'noun';
+ * indexator.translateTag(VBG); // return 'verb';
+ * indexator.translateTag(VBN); // return 'verb';
  * @param {String} tag - Tag given by Tagger
  * @return {String} Tag who match with a Lemmatizer tag (or false)
  */
@@ -123,6 +143,18 @@ Indexator.prototype.translateTag = function(tag = '') {
 
 /**
  * Sanitize list of terms (with some filter)
+ * @example &lt;caption>Example usage of 'sanitize' function&lt;/caption>
+ * let indexator = new Indexator();
+ * indexator.sanitize([ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+ *   { term: 'is', tag: 'VBZ' },
+ *   { term: 'a', tag: 'DT' },
+ *   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+ *   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]);
+ * // return [ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+ * //   { term: '#', tag: '#' },
+ * //   { term: '#', tag: '#' },
+ * //   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+ * //   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]
  * @param {Array} terms - List of terms
  * @return {Array} Liste of sanitized terms
  */
@@ -149,6 +181,18 @@ Indexator.prototype.sanitize = function(terms = []) {
 
 /**
  * Lemmatize a list of tagged terms (add a property lemma &amp; stem)
+ * @example &lt;caption>Example usage of 'translateTag' function&lt;/caption>
+ * let indexator = new Indexator();
+ * indexator.lemmatize([ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+ *   { term: 'is', tag: 'VBZ' },
+ *   { term: 'a', tag: 'DT' },
+ *   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+ *   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]);
+ * // return [ { term: 'this', tag: 'DT', lemma: 'this', stem: 'this' },
+ * //   { term: '#', tag: '#' },
+ * //   { term: '#', tag: '#' },
+ * //   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
+ * //   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]
  * @param {Array} terms - List of tagged terms
  * @return {Array} List of tagged terms with a lemma
  */
@@ -176,11 +220,15 @@ Indexator.prototype.lemmatize = function(terms = []) {
 
 /**
  * Compare the specificity of two objects between them
+ * @example &lt;caption>Example usage of 'compare' function&lt;/caption>
+ * Indexator.compare({ 'term': 'a', 'specificity': 1 }, { 'term': 'b', 'specificity': 2 }); // return 1
+ * Indexator.compare({ 'term': 'a', 'specificity': 1 }, { 'term': 'b', 'specificity': 1 }); // return 0
+ * Indexator.compare({ 'term': 'a', 'specificity': 2 }, { 'term': 'b', 'specificity': 1 }); // return -1
  * @param {Object} a - First object
  * @param {Object} b - Second object
  * @return {Number} -1, 1, or 0
  */
-Indexator.prototype.compare = function(a, b) {
+Indexator.compare = function(a, b) {
   if (a.specificity > b.specificity) return -1;
   else if (a.specificity &lt; b.specificity) return 1;
   else return 0;
@@ -188,8 +236,11 @@ Indexator.prototype.compare = function(a, b) {
 
 /**
  * Index a fulltext
+ * @example &lt;caption>Example usage of 'translateTag' function&lt;/caption>
+ * let indexator = new Indexator();
+ * indexator.index('This is a sample sentence'); // return an object representation of indexation
  * @param {String} data - Fulltext who need to be indexed
- * @return {Object} Return a representation of the fulltext (indexation &amp; more informations/statistics about tokens/terms)
+ * @return {Object} Return a representation of fulltext (indexation &amp; more informations/statistics about tokens/terms)
  */
 Indexator.prototype.index = function(data, options) {
   // Default value
@@ -295,7 +346,7 @@ Indexator.prototype.index = function(data, options) {
   }
   // If result need to be sorted
   if (sort) {
-    text.keywords = text.keywords.sort(this.compare);
+    text.keywords = text.keywords.sort(Indexator.compare);
   }
   return text;
 };
@@ -311,13 +362,13 @@ module.exports = Indexator;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DefaultFilter.html">DefaultFilter</a></li><li><a href="Indexator.html">Indexator</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="TermExtractor.html">TermExtractor</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Filter.html">Filter</a></li><li><a href="Indexator.html">Indexator</a></li><li><a href="Tagger.html">Tagger</a></li><li><a href="TermExtractor.html">TermExtractor</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 09 2019 04:14:08 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Oct 25 2019 21:24:22 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
