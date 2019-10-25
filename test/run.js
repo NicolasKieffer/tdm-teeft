@@ -8,7 +8,7 @@ const pkg = require('../package.json'),
   Teeft = require('../src/indexator.js'),
   Tagger = require('../src/tagger.js'),
   lexicon = require('../src/lexicon.js'),
-  DefaultFilter = require('../src/defaultfilter.js'),
+  Filter = require('../src/filter.js'),
   TermExtraction = require('../src/termextractor.js'),
   fs = require('fs'),
   Lemmatizer = require('javascript-lemmatizer'),
@@ -29,9 +29,9 @@ const wrapper = require('./dataset/in/wrapper.js');
 const myObject = {
   'indexator': new Teeft(),
   'tagger': new Tagger(lexicon),
-  'filter': new DefaultFilter(),
+  'filter': new Filter(),
   'extractor': new TermExtraction({
-    'filter': new DefaultFilter()
+    'filter': new Filter()
   })
 };
 
