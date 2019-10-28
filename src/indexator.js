@@ -23,7 +23,7 @@ const Lemmatizer = require('javascript-lemmatizer'),
  * let indexator = new Indexator();
  * // returns an instance of Indexator with default options
  * @param {Object} [options] - Options of constructor
- * @param {Object} [options.filter] - Options given to extractor of this instance of Indexator
+ * @param {Filter} [options.filter] - Options given to extractor of this instance of Indexator
  * @param {Object} [options.lexicon] - Lexicon used by tagger of this instance of Indexator
  * @param {Object} [options.stopwords] - Stopwords used by this instance of Indexator
  * @param {Object} [options.dictionary] - Dictionnary used by this instance of Indexator

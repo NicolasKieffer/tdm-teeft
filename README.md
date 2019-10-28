@@ -184,7 +184,7 @@ defaultFilter.configure('test'); // returns null
 | Param | Type | Description |
 | --- | --- | --- |
 | [options] | <code>Object</code> | Options of constructor |
-| [options.filter] | <code>Object</code> | Options given to extractor of this instance of Indexator |
+| [options.filter] | [<code>Filter</code>](#Filter) | Options given to extractor of this instance of Indexator |
 | [options.lexicon] | <code>Object</code> | Lexicon used by tagger of this instance of Indexator |
 | [options.stopwords] | <code>Object</code> | Stopwords used by this instance of Indexator |
 | [options.dictionary] | <code>Object</code> | Dictionnary used by this instance of Indexator |
