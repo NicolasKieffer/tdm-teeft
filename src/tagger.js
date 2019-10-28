@@ -30,7 +30,7 @@ const Tagger = function(lexicon = {}) {
  * let tagger = new Tagger();
  * tagger.tag(['this', 'is', 'a', 'test']); // return [{ 'term': 'this', 'tag': 'DT' }, { 'term': 'is', 'tag': 'VBZ' }, { 'term': 'a', 'tag': 'DT' }, { 'term': 'test', 'tag': 'NN' }]
  * @param {Array} terms - List of terms
- * @return {Array} List of tagged terms
+ * @returns {Array} List of tagged terms
  */
 Tagger.prototype.tag = function(terms = []) {
   let result = [];

@@ -61,7 +61,7 @@ const Indexator = function(options = {}) {
  * let indexator = new Indexator();
  * indexator.tokenize('my sample sentence'); // return ['my', 'sample', 'sentence']
  * @param {String} text - Fulltext
- * @return {Array} Array of tokens
+ * @returns {Array} Array of tokens
  */
 Indexator.prototype.tokenize = function(text = '') {
   const words = text.split(/\s/g);
@@ -97,7 +97,7 @@ Indexator.prototype.tokenize = function(text = '') {
  * indexator.translateTag(VBG); // return 'verb';
  * indexator.translateTag(VBN); // return 'verb';
  * @param {String} tag - Tag given by Tagger
- * @return {String} Tag who match with a Lemmatizer tag (or false)
+ * @returns {String} Tag who match with a Lemmatizer tag (or false)
  */
 Indexator.prototype.translateTag = function(tag = '') {
   let result = false;
@@ -128,7 +128,7 @@ Indexator.prototype.translateTag = function(tag = '') {
  * //   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
  * //   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]
  * @param {Array} terms - List of terms
- * @return {Array} Liste of sanitized terms
+ * @returns {Array} Liste of sanitized terms
  */
 Indexator.prototype.sanitize = function(terms = []) {
   let result = [];
@@ -166,7 +166,7 @@ Indexator.prototype.sanitize = function(terms = []) {
  * //   { term: 'sample', tag: 'NN', lemma: 'sample', stem: 'sampl' },
  * //   { term: 'test', tag: 'NN', lemma: 'test', stem: 'test' } ]
  * @param {Array} terms - List of tagged terms
- * @return {Array} List of tagged terms with a lemma
+ * @returns {Array} List of tagged terms with a lemma
  */
 Indexator.prototype.lemmatize = function(terms = []) {
   let result = [];
@@ -198,7 +198,7 @@ Indexator.prototype.lemmatize = function(terms = []) {
  * Indexator.compare({ 'term': 'a', 'specificity': 2 }, { 'term': 'b', 'specificity': 1 }); // return -1
  * @param {Object} a - First object
  * @param {Object} b - Second object
- * @return {Number} -1, 1, or 0
+ * @returns {Number} -1, 1, or 0
  */
 Indexator.compare = function(a, b) {
   if (a.specificity > b.specificity) return -1;
@@ -212,7 +212,7 @@ Indexator.compare = function(a, b) {
  * let indexator = new Indexator();
  * indexator.index('This is a sample sentence'); // return an object representation of indexation
  * @param {String} data - Fulltext who need to be indexed
- * @return {Object} Return a representation of fulltext (indexation & more informations/statistics about tokens/terms)
+ * @returns {Object} Return a representation of fulltext (indexation & more informations/statistics about tokens/terms)
  */
 Indexator.prototype.index = function(data, options) {
   // Default value

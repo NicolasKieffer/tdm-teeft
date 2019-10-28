@@ -87,7 +87,7 @@ Filter.DEFAULT = {
  * defaultFilter.call(1, 1); // returns false
  * @param {Number} occur - Occurence value
  * @param {Number} strength - Strength value
- * @return {Boolean} Return true if conditions are respected
+ * @returns {Boolean} Return true if conditions are respected
  */
 Filter.prototype.call = function(occur, strength) {
   return (strength < this.noLimitStrength && occur >= this.minOccur) || strength >= this.noLimitStrength;
@@ -101,7 +101,7 @@ Filter.prototype.call = function(occur, strength) {
  * defaultFilter.configure(5000); // returns 7
  * defaultFilter.configure('test'); // returns null
  * @param {Number} length - Text length
- * @return {Number} Return configured minOccur value
+ * @returns {Number} Return configured minOccur value
  */
 Filter.prototype.configure = function(length) {
   if (!isNaN(length)) {

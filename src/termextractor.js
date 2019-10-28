@@ -45,7 +45,7 @@ const TermExtractor = function(options) {
  * // 'fulltext': { 'frequency': 1, 'strength': 1 }
  * // };
  * @param {Array} taggedTerms - List of tagged terms
- * @return {Object} Return all extracted terms
+ * @returns {Object} Return all extracted terms
  */
 TermExtractor.prototype.extract = function(taggedTerms) {
   const terms = {
@@ -115,7 +115,7 @@ TermExtractor.prototype.extract = function(taggedTerms) {
  * Check if prefix of given string match with given prefix
  * @param {String} str - String where the prefix will be searched
  * @param {String} prefix - Prefix used for the research
- * @return {Boolean} Return true if the prefix of the string is correct, else false
+ * @returns {Boolean} Return true if the prefix of the string is correct, else false
  */
 TermExtractor.prototype._startsWith = function(str, prefix) {
   return str.substring(0, prefix.length) === prefix;
