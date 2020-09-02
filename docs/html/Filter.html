@@ -332,11 +332,44 @@
     
         <p class="code-caption">Example usage of 'contructor' (with paramters)</p>
     
-    <pre class="prettyprint"><code>let options = {  // Will allow to assign a 'value' depending on the length of indexed text (nb of tokens)  'lengthSteps': {    'values': [ // store intermediate steps here,      { // here : value '4' will be used for text length > 1000 tokens &amp;&amp; text length &lt;= 3000 tokens        'lim': 3000, // 'this property must be > 'lengthSteps.min.lim' &amp;&amp; must be &lt; 'lengthSteps.max.lim'        'value': 4      },      { // here : value '5' will be used for text length > 3000 tokens &amp;&amp; text length &lt;= 4000 tokens        'lim': 4000, // 'this property must be > 'lengthSteps.min.lim' &amp;&amp; must be &lt; 'lengthSteps.max.lim'        'value': 5      }    ],    'min': { // 'value' depending of minimum 'lim' length of text (here : value '1' will be used for text length &lt;= 1000 tokens)      'lim': 1000,      'value': 1    },    'max': { // 'value' depending of maximum 'lim' length of text (here : value '7' will be used for text length > 6000 tokens)      'lim': 6000,      'value': 7    }  },  'minOccur': 3, // Minimal number of occurence (of tokens) used by default : here 3. This value will be updated depending on the length of indexed text when 'configure' function is called  'noLimitStrength': 2 //  },  defaultFilter = new Filter(options);// returns an instance of Filter with properties :// - minOccur : 3// - noLimitStrength : 2// - lengthSteps : {'values': [{'lim': 3000, 'value': 4}, {'lim': 4000, 'value': 5}], 'min': {'lim': 1000, 'value': 1}, 'max': {'lim': 6000, 'value': 7}</code></pre>
+    <pre class="prettyprint"><code>let options = {
+  // Will allow to assign a 'value' depending on the length of indexed text (nb of tokens)
+  'lengthSteps': {
+    'values': [ // store intermediate steps here,
+      { // here : value '4' will be used for text length > 1000 tokens &amp;&amp; text length &lt;= 3000 tokens
+        'lim': 3000, // 'this property must be > 'lengthSteps.min.lim' &amp;&amp; must be &lt; 'lengthSteps.max.lim'
+        'value': 4
+      },
+      { // here : value '5' will be used for text length > 3000 tokens &amp;&amp; text length &lt;= 4000 tokens
+        'lim': 4000, // 'this property must be > 'lengthSteps.min.lim' &amp;&amp; must be &lt; 'lengthSteps.max.lim'
+        'value': 5
+      }
+    ],
+    'min': { // 'value' depending of minimum 'lim' length of text (here : value '1' will be used for text length &lt;= 1000 tokens)
+      'lim': 1000,
+      'value': 1
+    },
+    'max': { // 'value' depending of maximum 'lim' length of text (here : value '7' will be used for text length > 6000 tokens)
+      'lim': 6000,
+      'value': 7
+    }
+  },
+  'minOccur': 3, // Minimal number of occurence (of tokens) used by default : here 3. This value will be updated depending on the length of indexed text when 'configure' function is called
+  'noLimitStrength': 2 //
+  },
+  defaultFilter = new Filter(options);
+// returns an instance of Filter with properties :
+// - minOccur : 3
+// - noLimitStrength : 2
+// - lengthSteps : {'values': [{'lim': 3000, 'value': 4}, {'lim': 4000, 'value': 5}], 'min': {'lim': 1000, 'value': 1}, 'max': {'lim': 6000, 'value': 7}</code></pre>
 
         <p class="code-caption">Example usage of 'contructor' (with default values)</p>
     
-    <pre class="prettyprint"><code>let defaultFilter = new Filter();// returns an instance of Filter with properties :// - minOccur : 7// - noLimitStrength : 2// - lengthSteps : {'values': [{'lim': 3000, 'value': 4}], 'min': {'lim': 1000, 'value': 1}, 'max': {'lim': 6000, 'value': 7}</code></pre>
+    <pre class="prettyprint"><code>let defaultFilter = new Filter();
+// returns an instance of Filter with properties :
+// - minOccur : 7
+// - noLimitStrength : 2
+// - lengthSteps : {'values': [{'lim': 3000, 'value': 4}], 'min': {'lim': 1000, 'value': 1}, 'max': {'lim': 6000, 'value': 7}</code></pre>
 
 
 
@@ -545,7 +578,11 @@
     
         <p class="code-caption">Example usage of 'call' function</p>
     
-    <pre class="prettyprint"><code>let defaultFilter = new Filter();defaultFilter.configure(500);defaultFilter.call(1, 1); // returns truedefaultFilter.configure(5000);defaultFilter.call(1, 1); // returns false</code></pre>
+    <pre class="prettyprint"><code>let defaultFilter = new Filter();
+defaultFilter.configure(500);
+defaultFilter.call(1, 1); // returns true
+defaultFilter.configure(5000);
+defaultFilter.call(1, 1); // returns false</code></pre>
 
 
 
@@ -711,7 +748,10 @@
     
         <p class="code-caption">Example usage of 'configure' function</p>
     
-    <pre class="prettyprint"><code>let defaultFilter = new Filter();defaultFilter.configure(500); // returns 1defaultFilter.configure(5000); // returns 7defaultFilter.configure('test'); // returns null</code></pre>
+    <pre class="prettyprint"><code>let defaultFilter = new Filter();
+defaultFilter.configure(500); // returns 1
+defaultFilter.configure(5000); // returns 7
+defaultFilter.configure('test'); // returns null</code></pre>
 
 
 
@@ -737,7 +777,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Oct 28 2019 14:36:03 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Wed Sep 02 2020 14:31:12 GMT+0200 (GMT+02:00)
 </footer>
 
 <script> prettyPrint(); </script>

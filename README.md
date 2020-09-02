@@ -187,6 +187,8 @@ defaultFilter.configure('test'); // returns null
 | [options.filter] | [<code>Filter</code>](#Filter) | Options given to extractor of this instance of Indexator |
 | [options.lexicon] | <code>Object</code> | Lexicon used by tagger of this instance of Indexator |
 | [options.stopwords] | <code>Object</code> | Stopwords used by this instance of Indexator |
+| [options.lemmatizer] | <code>Object</code> | Lemmatizer used by tagger of this instance of Indexator |
+| [options.stemmer] | <code>Object</code> | Stemmer used by this instance of Indexator |
 | [options.dictionary] | <code>Object</code> | Dictionnary used by this instance of Indexator |
 
 **Example** *(Example usage of &#x27;contructor&#x27; (with paramters))*  
