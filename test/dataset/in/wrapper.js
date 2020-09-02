@@ -26,15 +26,15 @@ const wrappers = {};
  *   - lemmatize()
  */
 wrappers.indexator = {
-  'index': function(fn, item, cb) {
-    fs.readFile(item.arguments.path, 'utf-8', function(err, res) {
+  'index': function (fn, item, cb) {
+    fs.readFile(item.arguments.path, 'utf-8', function (err, res) {
       if (err) throw err;
       const result = fn(res);
       return cb(result.keywords);
     });
   },
   'tokenize': null,
-  'translateTag': function(fn, item, cb) {
+  'translateTag': function (fn, item, cb) {
     // Get all tags in lexicon
     const tags = {};
     for (let key in lexicon) {
@@ -47,10 +47,10 @@ wrappers.indexator = {
     }
     return cb(Object.keys(results));
   },
-  'sanitize': function(fn, item, cb) {
+  'sanitize': function (fn, item, cb) {
     const value = fn(item.arguments),
       invalid = indexator.tagger.tag(indexator.SEPARATOR)[0],
-      result = value.reduce(function(sum, current) {
+      result = value.reduce(function (sum, current) {
         if (current.tag === invalid.tag) {
           return sum + 1;
         } else {
@@ -77,14 +77,14 @@ wrappers.tagger = {
  *   - call()
  */
 wrappers.filter = {
-  'configure': function(fn, item, cb) {
+  'configure': function (fn, item, cb) {
     let result = true;
     for (let i = 0; i < item.arguments.length; i++) {
       result = result && fn(item.arguments[i]) === item.values[i];
     }
     return cb(result);
   },
-  'call': function(fn, item, cb) {
+  'call': function (fn, item, cb) {
     return cb(fn(item.arguments.occur, item.arguments.length));
   }
 };
@@ -94,7 +94,7 @@ wrappers.filter = {
  *   - extract()
  */
 wrappers.extractor = {
-  'extract': function(fn, item, cb) {
+  'extract': function (fn, item, cb) {
     const result = Object.keys(fn(item.arguments));
     return cb(result);
   }

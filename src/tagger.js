@@ -15,7 +15,7 @@
  * @param {Object} [options] - Options of constructor
  * @returns {Tagger} - An instance of Tagger
  */
-const Tagger = function(lexicon = {}) {
+const Tagger = function (lexicon = {}) {
   this.lexicon = Object.create(null, {});
   // Set all keys
   for (let keys in lexicon) {
@@ -32,7 +32,7 @@ const Tagger = function(lexicon = {}) {
  * @param {Array} terms - List of terms
  * @returns {Array} List of tagged terms
  */
-Tagger.prototype.tag = function(terms = []) {
+Tagger.prototype.tag = function (terms = []) {
   let result = [];
   for (let i = 0; i < terms.length; i++) {
     const term = terms[i],

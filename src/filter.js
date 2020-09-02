@@ -48,7 +48,7 @@
  * @param {Number} [options.lengthSteps] - Steps length
  * @returns {Filter} - An instance of Filter
  */
-const Filter = function(options) {
+const Filter = function (options) {
   this.minOccur = options && options.minOccur ? options.minOccur : Filter.DEFAULT.minOccur;
   this.noLimitStrength = options && options.noLimitStrength ? options.noLimitStrength : Filter.DEFAULT.noLimitStrength;
   this.lengthSteps = options && options.lengthSteps ? options.lengthSteps : Filter.DEFAULT.lengthSteps;
@@ -89,7 +89,7 @@ Filter.DEFAULT = {
  * @param {Number} strength - Strength value
  * @returns {Boolean} Return true if conditions are respected
  */
-Filter.prototype.call = function(occur, strength) {
+Filter.prototype.call = function (occur, strength) {
   return (strength < this.noLimitStrength && occur >= this.minOccur) || strength >= this.noLimitStrength;
 };
 
@@ -103,7 +103,7 @@ Filter.prototype.call = function(occur, strength) {
  * @param {Number} length - Text length
  * @returns {Number} Return configured minOccur value
  */
-Filter.prototype.configure = function(length) {
+Filter.prototype.configure = function (length) {
   if (!isNaN(length)) {
     if (length < this.lengthSteps.min.lim) {
       this.minOccur = this.lengthSteps.min.value;

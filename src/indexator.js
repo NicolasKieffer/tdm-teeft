@@ -26,10 +26,12 @@ const Lemmatizer = require('javascript-lemmatizer'),
  * @param {Filter} [options.filter] - Options given to extractor of this instance of Indexator
  * @param {Object} [options.lexicon] - Lexicon used by tagger of this instance of Indexator
  * @param {Object} [options.stopwords] - Stopwords used by this instance of Indexator
+ * @param {Object} [options.lemmatizer] - Lemmatizer used by tagger of this instance of Indexator
+ * @param {Object} [options.stemmer] - Stemmer used by this instance of Indexator
  * @param {Object} [options.dictionary] - Dictionnary used by this instance of Indexator
  * @returns {Indexator} - An instance of Indexator
  */
-const Indexator = function(options = {}) {
+const Indexator = function (options = {}) {
   const filterOpts =
     options && options.filter
       ? {
@@ -39,8 +41,8 @@ const Indexator = function(options = {}) {
   // Tagger + filter + extractor + lemmatizer
   this.tagger = new Tagger(options && options.lexicon ? options.lexicon : lexicon);
   this.extractor = new TermExtraction(filterOpts);
-  this.lemmatizer = new Lemmatizer();
-  this.stemmer = snowballFactory.newStemmer('english');
+  this.lemmatizer = options && options.lemmatizer ? options.lemmatizer : new Lemmatizer();
+  this.stemmer = options && options.stemmer ? options.stemmer : snowballFactory.newStemmer('english');
   this.stopwords = options && options.stopwords ? options.stopwords : {};
   this.dictionary = options && options.dictionary ? options.dictionary : {};
   this.NOT_ALPHANUMERIC = new RegExp('\\W', 'g'); // RegExp of alphanumerique char
@@ -63,7 +65,7 @@ const Indexator = function(options = {}) {
  * @param {String} text - Fulltext
  * @returns {Array} Array of tokens
  */
-Indexator.prototype.tokenize = function(text = '') {
+Indexator.prototype.tokenize = function (text = '') {
   const words = text.split(/\s/g);
   let result = [];
   for (let i = 0; i < words.length; i++) {
@@ -99,7 +101,7 @@ Indexator.prototype.tokenize = function(text = '') {
  * @param {String} tag - Tag given by Tagger
  * @returns {String} Tag who match with a Lemmatizer tag (or false)
  */
-Indexator.prototype.translateTag = function(tag = '') {
+Indexator.prototype.translateTag = function (tag = '') {
   let result = false;
   if (tag === 'RB') {
     result = 'adv';
@@ -130,7 +132,7 @@ Indexator.prototype.translateTag = function(tag = '') {
  * @param {Array} terms - List of terms
  * @returns {Array} Liste of sanitized terms
  */
-Indexator.prototype.sanitize = function(terms = []) {
+Indexator.prototype.sanitize = function (terms = []) {
   let result = [];
   const invalid = this.tagger.tag(this.SEPARATOR)[0];
   for (let i = 0; i < terms.length; i++) {
@@ -168,7 +170,7 @@ Indexator.prototype.sanitize = function(terms = []) {
  * @param {Array} terms - List of tagged terms
  * @returns {Array} List of tagged terms with a lemma
  */
-Indexator.prototype.lemmatize = function(terms = []) {
+Indexator.prototype.lemmatize = function (terms = []) {
   let result = [];
   for (let i = 0; i < terms.length; i++) {
     const trslTag = this.translateTag(terms[i].tag);
@@ -200,7 +202,7 @@ Indexator.prototype.lemmatize = function(terms = []) {
  * @param {Object} b - Second object
  * @returns {Number} -1, 1, or 0
  */
-Indexator.compare = function(a, b) {
+Indexator.compare = function (a, b) {
   if (a.specificity > b.specificity) return -1;
   else if (a.specificity < b.specificity) return 1;
   else return 0;
@@ -214,7 +216,7 @@ Indexator.compare = function(a, b) {
  * @param {String} data - Fulltext who need to be indexed
  * @returns {Object} Return a representation of fulltext (indexation & more informations/statistics about tokens/terms)
  */
-Indexator.prototype.index = function(data, options) {
+Indexator.prototype.index = function (data, options) {
   // Default value
   const text = {
       'keywords': [], // Keywords

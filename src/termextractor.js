@@ -22,7 +22,7 @@ const _ = require('lodash'),
  * @param {Filter} [options.filter] - An instance of Filter
  * @returns {TermExtractor} - An instance of TermExtractor
  */
-const TermExtractor = function(options) {
+const TermExtractor = function (options) {
   this.SEARCH = 0;
   this.NOUN = 1;
   this.tagger = options && options.tagger ? options.tagger : new Tagger();
@@ -47,9 +47,9 @@ const TermExtractor = function(options) {
  * @param {Array} taggedTerms - List of tagged terms
  * @returns {Object} Return all extracted terms
  */
-TermExtractor.prototype.extract = function(taggedTerms) {
+TermExtractor.prototype.extract = function (taggedTerms) {
   const terms = {
-      _add: function(norm) {
+      _add: function (norm) {
         if (!this[norm]) {
           this[norm] = {
             frequency: 0
@@ -117,7 +117,7 @@ TermExtractor.prototype.extract = function(taggedTerms) {
  * @param {String} prefix - Prefix used for the research
  * @returns {Boolean} Return true if the prefix of the string is correct, else false
  */
-TermExtractor.prototype._startsWith = function(str, prefix) {
+TermExtractor.prototype._startsWith = function (str, prefix) {
   return str.substring(0, prefix.length) === prefix;
 };
 
