@@ -143,7 +143,7 @@ Indexator.prototype.sanitize = function (terms = []) {
       if (
         (!na || na.length <= this.MAX_NOT_ALPHANUMERIC) &&
         (!d || d.length < this.MAX_DIGIT) &&
-        !this.stopwords[terms[i].lemma]
+        (!this.stopwords[terms[i].lemma] || !this.stopwords[terms[i].term])
       ) {
         value = terms[i];
       }
