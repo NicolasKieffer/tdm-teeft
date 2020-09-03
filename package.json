@@ -1,6 +1,6 @@
 {
   "name": "tdm-teeft",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Teeft tdm module",
   "main": "index.js",
   "scripts": {
