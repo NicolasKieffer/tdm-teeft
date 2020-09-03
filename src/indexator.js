@@ -45,14 +45,14 @@ const Indexator = function (options = {}) {
   this.stemmer = options && options.stemmer ? options.stemmer : snowballFactory.newStemmer('english');
   this.stopwords = options && options.stopwords ? options.stopwords : {};
   this.dictionary = options && options.dictionary ? options.dictionary : {};
-  this.NOT_ALPHANUMERIC = new RegExp('\\W', 'g'); // RegExp of alphanumerique char
+  this.NOT_ALPHANUMERIC = new RegExp(/[^a-zA-Z0-9À-ÿ]/, 'g'); // RegExp of alphanumerique char
   this.DIGIT = new RegExp('\\d', 'g'); // RegExp of number
   this.NOUN_TAG = new RegExp(/(\|)?N[A-Z]{1,3}(\|)?/g); // RegExp of noun tag
   this.VERB_TAG = new RegExp(/(\|)?V[A-Z]{1,3}(\|)?/g); // RegExp of verb tag
   this.MAX_NOT_ALPHANUMERIC = 2; // limit of alphanumeric char
   this.MAX_DIGIT = 2; // Limit of digit
   this.MIN_LENGTH = 4; // Minimum length of token
-  this.SPECIFIC_TERM = new RegExp(/^([^a-zA-Z0-9]*|[!\-;:,.?]*)(\w+)([^a-zA-Z0-9]*|[!\-;:,.?]*)$/g); // RegExp of a term between punctuation
+  this.SPECIFIC_TERM = new RegExp(/^([^a-zA-Z0-9À-ÿ]*|[!\-;:,.?]*)([a-zA-Z0-9À-ÿ]+)([^a-zA-Z0-9À-ÿ]*|[!\-;:,.?]*)$/g); // RegExp of a term between punctuation
   this.SEPARATOR = '#'; // Char separator
   return this;
 };
